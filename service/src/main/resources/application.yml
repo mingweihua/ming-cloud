@@ -1,17 +1,19 @@
 server:
-  port: 8080
+  port: 8091
+  servlet:
+    context-path: /service
 
 spring:
-  application:
-    name: service
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/ming?serverTimezone=CST
-    username: root
-    password: 123456
+  datasource: #定义数据源
+    name: ming
+    #127.0.0.1为本机测试的ip，3306是mysql的端口号。serverTimezone是定义时区，照抄就好，mysql高版本需要定义这些东西
+    url: jdbc:mysql:///ming?serverTimezone=UTC
+    username: root  #数据库用户名，root为管理员
+    password: 123456 #该数据库用户的密码
 
-mybatis:
-  type-aliases-package: cn.sysu.pojo #开启别名
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: false
 
 #如果eureka-server配置的是默认都端口和默认defaultZone，即不需要告诉该服务去哪找。
 #eureka:
