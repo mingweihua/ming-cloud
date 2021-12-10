@@ -19,7 +19,7 @@ public class ConsumerController {
     @RequestMapping("/test")
     public List<ZK_collect> test() {
         log.info("测试方法则行");
-        String url = "http://localhost:8091/service/getAllZKData";
+        String url = "http://localhost:8092/service/getAllZKData";
         List<ZK_collect> zk_collects = restTemplate.getForObject(url, List.class);
         return zk_collects;
     }

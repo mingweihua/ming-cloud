@@ -10,6 +10,7 @@
         <module>service</module>
         <module>consumer</module>
         <module>eureka-server</module>
+        <module>service2</module>
     </modules>
     <name>ming-cloud</name>
     <packaging>pom</packaging>

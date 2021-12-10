@@ -6,7 +6,7 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: "http://localhost:8090/eureka"
+      defaultZone: "http://127.0.0.1:8090/eureka"
 
   #client:
     #是否将自己注册到Eureka Server上，默认为true
