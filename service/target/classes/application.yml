@@ -1,0 +1,22 @@
+server:
+  port: 8091
+  servlet:
+    context-path: /service
+
+spring:
+  datasource: #定义数据源
+    name: ming
+    #127.0.0.1为本机测试的ip，3306是mysql的端口号。serverTimezone是定义时区，照抄就好，mysql高版本需要定义这些东西
+    url: jdbc:mysql:///ming?serverTimezone=UTC
+    username: root  #数据库用户名，root为管理员
+    password: 123456 #该数据库用户的密码
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: false
+
+#如果eureka-server配置的是默认都端口和默认defaultZone，即不需要告诉该服务去哪找。
+#eureka:
+  #client:
+    #service-url:
+      #defaultZone: http://171.16.1.101:8761/eureka
