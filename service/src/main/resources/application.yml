@@ -1,0 +1,20 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ming?serverTimezone=CST
+    username: root
+    password: 123456
+
+mybatis:
+  type-aliases-package: cn.sysu.pojo #开启别名
+
+#如果eureka-server配置的是默认都端口和默认defaultZone，即不需要告诉该服务去哪找。
+#eureka:
+  #client:
+    #service-url:
+      #defaultZone: http://171.16.1.101:8761/eureka

@@ -1,0 +1,13 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: consumer
+
+
+
+#如果eureka-server配置的是默认都端口和默认defaultZone，即不需要告诉该服务去哪找。
+#eureka:
+  #client:
+    #service-url:
+      #defaultZone: http://171.16.1.101:8761/eureka
