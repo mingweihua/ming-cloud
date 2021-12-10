@@ -4,6 +4,10 @@ spring:
   application:
     name: eureka-server-ming
 eureka:
+  client:
+    service-url:
+      defaultZone: "http://localhost:8090/eureka"
+
   #client:
     #是否将自己注册到Eureka Server上，默认为true
     #register-with-eureka: false
