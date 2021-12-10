@@ -1,8 +1,8 @@
 server:
-  port: 8761    #DEFAULT_URL = "http://localhost:8761" #
+  port: 8090    #DEFAULT_URL = "http://localhost:8761" #
 spring:
   application:
-    name: eureka-server
+    name: eureka-server-ming
 eureka:
   #client:
     #是否将自己注册到Eureka Server上，默认为true
