@@ -1,6 +1,9 @@
 package cn.sysu.controller;
 
+import cn.sysu.pojo.ReturnPattern;
 import cn.sysu.pojo.ZK_collect;
+import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -14,6 +17,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
+@DefaultProperties(defaultFallback = "defaultFallbackMethod")
 public class ConsumerController {
 
     @Autowired
@@ -62,5 +66,39 @@ public class ConsumerController {
         log.info("此时IP和端口换成服务名/服务id");
         List<ZK_collect> zk_collects = restTemplate2.getForObject(url, List.class);
         return zk_collects;
+    }
+
+    /*
+        使用hystrix来提供线程隔离、服务降级和服务熔断等之类的
+
+        注意：hystrix跳转的方法，必须有相同的返回类型，相同的输入参数类型
+        但若是使用DefaultProperties，也就是所有出问题函数都走，因此输入参数就不需要一样了
+
+        默认时间是1s，因此可以让线程睡眠2000ms来测试
+     */
+    @RequestMapping("/test4")
+    //@HystrixCommand(fallbackMethod = "hystrixFallbackMethod")
+    @HystrixCommand
+    public ReturnPattern test4() {
+        log.info("hystrix测试方法进入");
+
+        String url = "http://service-ming/service/getAllZKData";
+        /*try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
+        List<ZK_collect> zk_collects = restTemplate2.getForObject(url, List.class);
+        ReturnPattern returnPattern = new ReturnPattern();
+        returnPattern.setMsg("success");
+        returnPattern.setData(zk_collects);
+        return returnPattern;
+    }
+
+    public ReturnPattern defaultFallbackMethod() {
+        log.info("defaultFallbackMethod 方法进入");
+        ReturnPattern returnPattern = new ReturnPattern();
+        returnPattern.setMsg("error：defaultFallbackMethod");
+        return returnPattern;
     }
 }
