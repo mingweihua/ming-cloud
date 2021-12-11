@@ -1,5 +1,5 @@
 server:
-  port: 8093
+  port: 8022
   servlet:
     context-path: /service
 
@@ -20,7 +20,7 @@ mybatis-plus:
 eureka:
   client:
     service-url:
-      defaultZone: "http://127.0.0.1:8090/eureka"
+      defaultZone: http://127.0.0.1:8011/eureka, http://127.0.0.1:8012/eureka
 #如果eureka-server配置的是默认都端口和默认defaultZone，即不需要告诉该服务去哪找。
 #eureka:
   #client:

@@ -1,5 +1,5 @@
 server:
-  port: 8091
+  port: 8031
   servlet:
     context-path: /consumer
 
@@ -7,7 +7,7 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: "http://127.0.0.1:8090/eureka"
+      defaultZone: http://127.0.0.1:8011/eureka, http://127.0.0.1:8012/eureka
 
     #如果eureka-server配置的是默认都端口和默认defaultZone，即不需要告诉该服务去哪找。
 #eureka:

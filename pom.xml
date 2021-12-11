@@ -11,6 +11,7 @@
         <module>consumer</module>
         <module>eureka-server</module>
         <module>service2</module>
+        <module>eureka-server2</module>
     </modules>
     <name>ming-cloud</name>
     <packaging>pom</packaging>
