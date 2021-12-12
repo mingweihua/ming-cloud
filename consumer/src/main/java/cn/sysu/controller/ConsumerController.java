@@ -4,6 +4,7 @@ import cn.sysu.pojo.ReturnPattern;
 import cn.sysu.pojo.ZK_collect;
 import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -83,15 +84,50 @@ public class ConsumerController {
         log.info("hystrix测试方法进入");
 
         String url = "http://service-ming/service/getAllZKData";
-        /*try {
+        try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }*/
+        }
         List<ZK_collect> zk_collects = restTemplate2.getForObject(url, List.class);
         ReturnPattern returnPattern = new ReturnPattern();
         returnPattern.setMsg("success");
         returnPattern.setData(zk_collects);
+        return returnPattern;
+    }
+
+    /*
+        hystrix  配置  HystrixCommandProperties.java
+            找到要配置的属性，ctrl+alt+F7,查看相应的name
+
+        hystrix超时时间配置
+
+     */
+    @RequestMapping("/test5")
+    @HystrixCommand(fallbackMethod = "hystrixFallbackMethod",commandProperties = {
+            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "2500")
+    })
+    public ReturnPattern test5() {
+        log.info("hystrix测试方法进入");
+
+        String url = "http://service-ming/service/getAllZKData";
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<ZK_collect> zk_collects = restTemplate2.getForObject(url, List.class);
+        ReturnPattern returnPattern = new ReturnPattern();
+        returnPattern.setMsg("success");
+        returnPattern.setData(zk_collects);
+        return returnPattern;
+    }
+
+
+    public ReturnPattern hystrixFallbackMethod() {
+        log.info("hystrixFallbackMethod 方法进入");
+        ReturnPattern returnPattern = new ReturnPattern();
+        returnPattern.setMsg("error：hystrixFallbackMethod");
         return returnPattern;
     }
 

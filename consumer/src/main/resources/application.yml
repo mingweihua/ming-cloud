@@ -17,3 +17,11 @@ eureka:
 spring:
   application:
     name: consumer-ming
+#hystrix全局配置
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 1500
