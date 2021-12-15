@@ -1,11 +1,13 @@
 package cn.sysu.controller;
 
+import cn.sysu.client.MyClient;
 import cn.sysu.pojo.ReturnPattern;
 import cn.sysu.pojo.ZK_collect;
 import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import lombok.extern.slf4j.Slf4j;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -23,6 +25,9 @@ public class ConsumerController {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    private MyClient myClient;
 
     //用于动态拉取相应服务的地址
     @Autowired
@@ -135,6 +140,27 @@ public class ConsumerController {
         log.info("defaultFallbackMethod 方法进入");
         ReturnPattern returnPattern = new ReturnPattern();
         returnPattern.setMsg("error：defaultFallbackMethod");
+        return returnPattern;
+    }
+
+
+    /*
+    当程序启动时，会进行包扫描，扫描所有 @FeignClient 的注解的类，并将这些信息注入 Spring IOC 容器中。
+    当定义的 Fegin 接口中的方法被调用时，通过 JDK代理 的方式，来生成具体的 RequestTemplate。
+    当生成代理时，Fegin 会为每个接口方法创建一个 RequestTemplate对象，该对象封装了HTTP请求需要的全部信息。
+然后有 RequestTemplate 生成 Request，然后把 Request 交给 Client 去处理，这里指的 Client 可以是 JDK 原生的 URLConnection、
+Apache 的 Http Client 也可以是 OKhttp。 最后 Client 被封装到 LoadBalanceclient 类，这各类结合 Ribbon 负载均衡发起服务之间的调用
+
+     */
+
+    @RequestMapping("/test6")
+    public ReturnPattern test6() {
+        log.info("使用Fegin");
+
+        List<ZK_collect> zk_collects = myClient.getAllZK_collect();
+        ReturnPattern returnPattern = new ReturnPattern();
+        returnPattern.setMsg("success");
+        returnPattern.setData(zk_collects);
         return returnPattern;
     }
 }
