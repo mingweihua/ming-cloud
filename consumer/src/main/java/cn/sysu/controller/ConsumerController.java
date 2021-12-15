@@ -153,6 +153,12 @@ Apache 的 Http Client 也可以是 OKhttp。 最后 Client 被封装到 LoadBal
 
      */
 
+    /*
+      注意：Feign的结合hystrix熔断不像以前那样，默认不开启，先配置文件中开启，后续再接口上配置一个类，该类必须实现该接口
+
+        写起来还是比较麻烦
+     */
+
     @RequestMapping("/test6")
     public ReturnPattern test6() {
         log.info("使用Fegin");

@@ -17,6 +17,11 @@ eureka:
 spring:
   application:
     name: consumer-ming
+
+feign:
+  hystrix:
+    enabled: true
+
 #hystrix全局配置
 hystrix:
   command:
