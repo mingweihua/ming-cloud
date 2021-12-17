@@ -26,7 +26,7 @@ public class ConsumerController {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Autowired
+    @Autowired(required = false)
     private MyClient myClient;
 
     //用于动态拉取相应服务的地址

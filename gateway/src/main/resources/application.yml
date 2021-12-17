@@ -1,0 +1,14 @@
+server:
+  port: 8041
+spring:
+  application:
+    name: gateway-zuul-ming
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8011/eureka, http://127.0.0.1:8012/eureka
+zuul:
+  routes:
+    service-ming : /zuul/**
+  servlet-path:            #注意：默认是/zuul,因此会出现no route for uri ....
+    /
