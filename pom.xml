@@ -10,9 +10,11 @@
         <module>service</module>
         <module>consumer</module>
         <module>eureka-server</module>
-        <module>service2</module>
         <module>eureka-server2</module>
+        <module>service2</module>
         <module>gateway</module>
+        <module>rabbitmq-consumer</module>
+        <module>rabbitmq-producer</module>
     </modules>
     <name>ming-cloud</name>
     <packaging>pom</packaging>
