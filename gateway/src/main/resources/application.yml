@@ -7,8 +7,10 @@ eureka:
   client:
     service-url:
       defaultZone: http://127.0.0.1:8011/eureka, http://127.0.0.1:8012/eureka
+
+
 zuul:
   routes:
-    service-ming : /zuul/**
+    service-ming : /zuul/**     #注意：zuul会拉取所有服务id，然后自动生成/服务id/**来绑定相关url和服务id的关系，因此这时候可以不配置
   servlet-path:            #注意：默认是/zuul,因此会出现no route for uri ....
     /
