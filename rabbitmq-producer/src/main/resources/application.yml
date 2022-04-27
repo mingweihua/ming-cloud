@@ -6,4 +6,7 @@ spring:
     username: guest
     password: guest
     virtual-host: /
-
+    # 消息投递确认机制
+    publisher-confirm-type: correlated
+    # 消息投递回退机制
+    publisher-returns: true
