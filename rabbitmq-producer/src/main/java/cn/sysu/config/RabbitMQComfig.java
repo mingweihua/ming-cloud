@@ -21,11 +21,11 @@ public class RabbitMQComfig {
     //2.创建交队列
     @Bean("queue1")
     public Queue createQueue1(){
-        return QueueBuilder.durable("QUEUE_NAME1").build();
+        return QueueBuilder.durable(QUEUE_NAME1).build();
     }
     @Bean("queue2")
     public Queue createQueue2(){
-        return QueueBuilder.durable("QUEUE_NAME2").build();
+        return QueueBuilder.durable(QUEUE_NAME2).build();
     }
 
     //3.队列与交换机的关系 Binding
