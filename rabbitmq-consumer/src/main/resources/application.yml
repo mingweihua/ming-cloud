@@ -6,4 +6,11 @@ spring:
     username: guest
     password: guest
     virtual-host: /
-
+    #设置手动确认机制
+#    listener:
+#      simple:
+#        acknowledge-mode: manual
+#        prefetch: 2
+#      direct:
+#        acknowledge-mode: manual
+#        prefetch: 2

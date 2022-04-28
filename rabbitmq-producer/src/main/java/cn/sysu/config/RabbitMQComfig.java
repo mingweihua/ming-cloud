@@ -11,6 +11,7 @@ public class RabbitMQComfig {
     public static final String EXCHANGE_NAME = "ming-topic-exchange";
     public static final String QUEUE_NAME1 = "ming-queue1";
     public static final String QUEUE_NAME2 = "ming-queue2";
+    public static final String QUEUE_NAME3 = "ming-queue-ttl";
 
     //1.创建交换机
     @Bean("topic-exchange")
@@ -27,6 +28,10 @@ public class RabbitMQComfig {
     public Queue createQueue2(){
         return QueueBuilder.durable(QUEUE_NAME2).build();
     }
+    @Bean("queue3")
+    public Queue createQueue3(){
+        return QueueBuilder.durable(QUEUE_NAME3).ttl(10000).build();
+    }
 
     //3.队列与交换机的关系 Binding
     @Bean
@@ -37,6 +42,11 @@ public class RabbitMQComfig {
     @Bean
     public Binding bindQueueAndExchange2(@Qualifier("queue2") Queue queue,@Qualifier("topic-exchange") Exchange exchange){
         return BindingBuilder.bind(queue).to(exchange).with("test2.#").noargs();
+    }
+
+    @Bean
+    public Binding bindQueueAndExchange3(@Qualifier("queue3") Queue queue,@Qualifier("topic-exchange") Exchange exchange){
+        return BindingBuilder.bind(queue).to(exchange).with("test3.#").noargs();
     }
 
 }
